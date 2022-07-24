@@ -1,5 +1,6 @@
 const grid = document.querySelector(".grid");
-let difficulty = ["easy", "medium", "hard"];
+// let difficulty = ["easy", "medium", "hard"];
+let difficulty = "easy";
 
 function chooseDifficulty(){
   
@@ -9,9 +10,12 @@ function createGame(difficulty){
     let num = 1;
   if(difficulty == "easy")
   {
+    num =1;
     for(let i = 0; i < 10; i++){ //make two loops one to creaee ids and one to create all the pairs
     const box = document.createElement('div');
-    box.classList.toggle('apple');
+    box.classList.toggle('box');
+    box.setAttribute('id', `${num}`) //give each box own id
+    num++;
     grid.appendChild(box);
     }
     grid.style.gridTemplateColumns = "repeat(5, 1fr)"; //gridSize variable is length and height of grid
@@ -42,6 +46,25 @@ function generateId(){ //function to create an array of 10 numbers 1-5 that only
     }
     return random;
 }
-//possible use of function: create a javascript function to randomly match any of the 5 pngs to identical ids
 
-console.log(generateId())
+function placeImages(arr){
+    let place = 0;
+    let num = 0;
+    let box = 1;
+    for(let i = 0; i < 10; i++){
+        num = arr[place];
+        const pic = document.createElement('img');
+        pic.classList.toggle('pic');
+        pic.setAttribute('src', `./images/${num}.png`);
+        document.getElementById(`${box}`).appendChild(pic); //goes box by box and add image
+        box++;
+        place++;
+        
+    }
+    console.log(arr);
+}
+//possible use of function: create a javascript function to randomly match any of the 5 pngs to identical ids
+//loop through array an add image to each id representing the picture number
+
+console.log(generateId());
+placeImages(generateId());
